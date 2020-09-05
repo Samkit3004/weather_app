@@ -82,7 +82,7 @@ class _HomeState extends State<Home> {
                 Padding(
                   padding: EdgeInsets.only(top: 10),
                   child: Text(
-                    currently != null ? currently.toString() : 'Enter a city!!',
+                    currently != null ? currently.toString() : '',
                     style: TextStyle(
                       color: Colors.white,
                       fontSize: 14,
