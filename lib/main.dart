@@ -1,5 +1,4 @@
 import 'dart:convert';
-
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:http/http.dart' as http;
@@ -24,7 +23,6 @@ class _HomeState extends State<Home> {
   var currently;
   var humidity;
   var windSpeed;
-
   Future getWeather(String input) async {
     http.Response response = await http.get(apif + input + apil);
     var results = jsonDecode(response.body);
@@ -40,32 +38,38 @@ class _HomeState extends State<Home> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        backgroundColor: Colors.lightGreen[400],
+        leading: Icon(
+          Icons.search,
+          color: Colors.white,
+        ),
+        title: Container(
+          child: TextField(
+            onSubmitted: (String input) {
+              getWeather(input);
+            },
+            style: TextStyle(color: Colors.white, fontSize: 25),
+            decoration: InputDecoration(
+              hintText: 'Search for a city',
+              hintStyle: TextStyle(
+                color: Colors.white,
+                fontSize: 18,
+              ),
+            ),
+          ),
+        ),
+      ),
       body: Column(
         children: <Widget>[
           Container(
             height: MediaQuery.of(context).size.height / 3,
             width: MediaQuery.of(context).size.width,
-            color: Colors.red,
+            color: Colors.green[700],
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               crossAxisAlignment: CrossAxisAlignment.center,
               children: <Widget>[
-                Container(
-                  child: TextField(
-                    onSubmitted: (String input) {
-                      getWeather(input);
-                    },
-                    style: TextStyle(color: Colors.white, fontSize: 25),
-                    decoration: InputDecoration(
-                      hintText: 'Search for a city',
-                      hintStyle: TextStyle(color: Colors.white, fontSize: 18),
-                      prefixIcon: Icon(
-                        Icons.search,
-                        color: Colors.white,
-                      ),
-                    ),
-                  ),
-                ),
                 Padding(
                   padding: EdgeInsets.only(bottom: 10),
                 ),
